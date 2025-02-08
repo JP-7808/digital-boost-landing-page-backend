@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import contactRoute from './routes/contact.js';
+import chatbotRoutes from './routes/chatbot.js';
 
 dotenv.config();
 const app = express();
@@ -26,7 +27,7 @@ mongoose.connection.on("disconnected", () => {
 
 // middleware
 app.use(cors({
-    origin: 'https://digital-boost-landing-page-frontend.vercel.app', 
+    origin: '*', 
     methods: 'GET,POST,PUT,DELETE',
     credentials: true,
 }));
@@ -35,6 +36,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/contact', contactRoute);
+app.use('/api/chatbot', chatbotRoutes);
 
 
 app.listen(PORT, () => {
